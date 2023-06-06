@@ -3,6 +3,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+:root {
+  --primary-color: #004eee;
+}
+
 body {
   background-color: #f2f3f7;
 }
@@ -34,13 +38,13 @@ body {
 }
 
 .inputForm button {
-  background-color: #004eee;
+  background-color: var(--primary-color);
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .heading {
