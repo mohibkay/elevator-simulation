@@ -13,15 +13,31 @@
       <h1 class="heading">Lift Simulation</h1>
       <form method="dialog" class="inputForm">
         <label for="floors">Number of Floors*</label>
-        <input type="number" id="floors" min="2" value="2" required />
+        <input
+          type="number"
+          id="floors"
+          min="2"
+          value="2"
+          class="floorInput"
+          required
+        />
 
         <label for="lifts">Number of Elevators*</label>
-        <input type="number" id="lifts" min="1" value="1" required />
+        <input
+          type="number"
+          id="lifts"
+          min="1"
+          value="1"
+          class="liftInput"
+          required
+        />
 
-        <button class="dialogBtn" value="default">Simulate</button>
+        <button class="simulateBtn" value="default">Simulate</button>
+        <p class="errorMsg"></p>
       </form>
     </header>
 
     <main class="floorContainer"></main>
+    <script src="./js/main.js"></script>
   </body>
 </html>
