@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f2f3f7;
+}
+
+.formContainer {
+  background-color: white;
+  max-width: max-content;
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputForm label {
+  text-align: center;
+}
+
+.inputForm input {
+  margin: 0.5rem 0 1.25rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #886d6d;
+}
+
+.inputForm button {
+  background-color: #004eee;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+.heading {
+  text-align: center;
+  margin: 1rem 2rem;
+}
