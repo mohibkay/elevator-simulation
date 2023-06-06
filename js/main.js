@@ -1,9 +1,10 @@
 const floorInput = document.querySelector('.floorInput');
 const liftInput = document.querySelector('.liftInput');
 const errorMsg = document.querySelector('.errorMsg');
+const backButton = document.querySelector('.backButton');
 const simulateBtn = document.querySelector('.simulateBtn');
 
-function hideFormShowLift(shouldHide) {
+function toggleFormVisibility(shouldHide) {
   const mainSection = document.querySelector('.mainSection');
   const formContainer = document.querySelector('.formContainer');
   mainSection.style.display = shouldHide ? 'block' : 'none';
@@ -14,11 +15,15 @@ function createFloorsAndLifts() {
   const floors = floorInput.value;
   const lifts = liftInput.value;
   if (!validateSubmission(floors, lifts)) return;
-  hideFormShowLift(true);
-}
+  toggleFormVisibility(true);
 
-function calculateDistance(floor, lift) {
-  return Math.abs(floor - lift);
+  // dynamically generate floors
+  for (let i = 0; i < floors; i++) {
+    const floor = document.createElement('div');
+    floor.classList.add('floor');
+    floor.textContent = i + 1;
+    document.querySelector('.floorsContainer').appendChild(floor);
+  }
 }
 
 function validateSubmission(floor, lift) {
@@ -29,5 +34,5 @@ function validateSubmission(floor, lift) {
   }
   return true;
 }
-
+backButton.addEventListener('click', () => toggleFormVisibility(false));
 simulateBtn.addEventListener('click', createFloorsAndLifts);
