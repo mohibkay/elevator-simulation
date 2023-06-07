@@ -63,6 +63,7 @@ body {
 
 .mainSection {
   display: none;
+  padding: 2rem;
 }
 
 .floorContainer {
@@ -84,7 +85,7 @@ body {
 .liftCar {
   width: 75px;
   height: 125px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   margin: 0 2rem;
   transition: transform ease-in-out 0.5s 0.5s;
 }
@@ -97,6 +98,6 @@ body {
 
 .floorBase {
   height: 2px;
-  background-color: black;
+  background-color: var(--secondary-color);
   flex: auto;
 }
