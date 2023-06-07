@@ -5,6 +5,35 @@ const backButton = document.querySelector('.backButton');
 const simulateBtn = document.querySelector('.simulateBtn');
 const simulationContainer = document.querySelector('.simulationContainer');
 
+function getLiftArray() {
+  return Array.from(document.querySelectorAll('.liftCar'), (el) => ({
+    el,
+    currentFloor: 0,
+  }));
+}
+
+function moveLift(liftCar, targetFloor, currentFloor) {
+  const distance = Math.abs(targetFloor - currentFloor);
+  liftCar.style.backgroundColor = 'red';
+  liftCar.style.transform = `translateY(-${targetFloor * 200}px)`;
+  liftCar.style.transition = `transform ${distance * 2}s ease-in-out`;
+}
+
+function addListenersToLiftBtn() {
+  const liftArray = getLiftArray();
+  const liftUpBtn = document.querySelectorAll('.liftUpBtn');
+
+  liftUpBtn.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const [_, floorNumber] = btn.id.split('-');
+      const liftCar = document.querySelector(`#liftCar-0`);
+
+      moveLift(liftCar, floorNumber, liftArray[0].currentFloor);
+      liftArray[0].currentFloor = floorNumber;
+    });
+  });
+}
+
 function toggleFormVisibility(shouldHide) {
   const mainSection = document.querySelector('.mainSection');
   const formContainer = document.querySelector('.formContainer');
@@ -31,6 +60,8 @@ function createFloors(floorCount) {
     clonedfloorContainer.querySelector(
       '.floorNumber'
     ).textContent = `Floor ${i}`;
+    clonedfloorContainer.querySelector('.liftUpBtn').id = `liftUpBtn-${i}`;
+
     if (i === 0) {
       createLifts(clonedfloorContainer.querySelector('.liftContainer'));
     }
@@ -45,6 +76,7 @@ function createFloorsAndLifts() {
   if (!validateSubmission(floorCount, liftCount)) return;
   toggleFormVisibility(true);
   createFloors(floorCount, liftCount);
+  main();
 }
 
 function validateSubmission(floor, lift) {
@@ -61,3 +93,7 @@ function validateSubmission(floor, lift) {
 }
 backButton.addEventListener('click', () => toggleFormVisibility(false));
 simulateBtn.addEventListener('click', createFloorsAndLifts);
+
+function main() {
+  addListenersToLiftBtn();
+}
