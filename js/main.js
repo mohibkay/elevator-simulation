@@ -42,7 +42,7 @@ function createFloorsAndLifts() {
   const floorCount = floorInput.value;
   const liftCount = liftInput.value;
 
-  if (!validateSubmission(floorCount)) return;
+  if (!validateSubmission(floorCount, liftCount)) return;
   toggleFormVisibility(true);
   createFloors(floorCount, liftCount);
 }
