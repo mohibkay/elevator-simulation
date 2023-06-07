@@ -12,23 +12,39 @@ function toggleFormVisibility(shouldHide) {
   formContainer.style.display = shouldHide ? 'none' : 'block';
 }
 
-function createFloors() {
-  const floors = floorInput.value;
-  const lifts = liftInput.value;
-  if (!validateSubmission(floors, lifts)) return;
-  toggleFormVisibility(true);
+function createLifts(liftContainer) {
+  const liftCount = liftInput.value;
+  for (let j = 0; j < liftCount; j++) {
+    const liftCar = document.createElement('div');
+    liftCar.classList.add('liftCar');
+    liftCar.id = `liftCar-${j}`;
+    liftContainer.append(liftCar);
+  }
+}
 
+function createFloors(floorCount) {
   const floorContainer = document.querySelector('.floorContainer');
   simulationContainer.innerHTML = ''; // Clear the simulationContainer
 
-  for (let i = 0; i < floors; i++) {
+  for (let i = 0; i < floorCount; i++) {
     const clonedfloorContainer = floorContainer.cloneNode(true);
     clonedfloorContainer.querySelector(
       '.floorNumber'
     ).textContent = `Floor ${i}`;
-    console.log(`Floor ${i}`);
+    if (i === 0) {
+      createLifts(clonedfloorContainer.querySelector('.liftContainer'));
+    }
     simulationContainer.prepend(clonedfloorContainer);
   }
+}
+
+function createFloorsAndLifts() {
+  const floorCount = floorInput.value;
+  const liftCount = liftInput.value;
+
+  if (!validateSubmission(floorCount)) return;
+  toggleFormVisibility(true);
+  createFloors(floorCount, liftCount);
 }
 
 function validateSubmission(floor, lift) {
@@ -40,4 +56,4 @@ function validateSubmission(floor, lift) {
   return true;
 }
 backButton.addEventListener('click', () => toggleFormVisibility(false));
-simulateBtn.addEventListener('click', createFloors);
+simulateBtn.addEventListener('click', createFloorsAndLifts);
