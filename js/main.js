@@ -53,6 +53,10 @@ function validateSubmission(floor, lift) {
     errorMsg.textContent = 'Floors must be greater than elevators';
     return false;
   }
+  if (lift < 1) {
+    errorMsg.textContent = 'At least 1 elevator is required';
+    return false;
+  }
   return true;
 }
 backButton.addEventListener('click', () => toggleFormVisibility(false));
