@@ -3,6 +3,7 @@ const liftInput = document.querySelector('.liftInput');
 const errorMsg = document.querySelector('.errorMsg');
 const backButton = document.querySelector('.backButton');
 const simulateBtn = document.querySelector('.simulateBtn');
+const simulationContainer = document.querySelector('.simulationContainer');
 
 function toggleFormVisibility(shouldHide) {
   const mainSection = document.querySelector('.mainSection');
@@ -11,18 +12,22 @@ function toggleFormVisibility(shouldHide) {
   formContainer.style.display = shouldHide ? 'none' : 'block';
 }
 
-function createFloorsAndLifts() {
+function createFloors() {
   const floors = floorInput.value;
   const lifts = liftInput.value;
   if (!validateSubmission(floors, lifts)) return;
   toggleFormVisibility(true);
 
-  // dynamically generate floors
+  const floorContainer = document.querySelector('.floorContainer');
+  simulationContainer.innerHTML = ''; // Clear the simulationContainer
+
   for (let i = 0; i < floors; i++) {
-    const floor = document.createElement('div');
-    floor.classList.add('floor');
-    floor.textContent = i + 1;
-    document.querySelector('.floorsContainer').appendChild(floor);
+    const clonedfloorContainer = floorContainer.cloneNode(true);
+    clonedfloorContainer.querySelector(
+      '.floorNumber'
+    ).textContent = `Floor ${i}`;
+    console.log(`Floor ${i}`);
+    simulationContainer.prepend(clonedfloorContainer);
   }
 }
 
@@ -35,4 +40,4 @@ function validateSubmission(floor, lift) {
   return true;
 }
 backButton.addEventListener('click', () => toggleFormVisibility(false));
-simulateBtn.addEventListener('click', createFloorsAndLifts);
+simulateBtn.addEventListener('click', createFloors);

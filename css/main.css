@@ -65,6 +65,10 @@ body {
   display: none;
 }
 
+.floorContainer {
+  margin-bottom: 2rem;
+}
+
 .liftContainer {
   display: flex;
 }
