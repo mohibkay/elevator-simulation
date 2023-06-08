@@ -60,10 +60,20 @@ function createFloors(floorCount) {
     clonedfloorContainer.querySelector(
       '.floorNumber'
     ).textContent = `Floor ${i}`;
-    clonedfloorContainer.querySelector('.liftUpBtn').id = `liftUpBtn-${i}`;
+
+    const upBtn = clonedfloorContainer.querySelector('.liftUpBtn');
+    if (upBtn !== null) {
+      upBtn.id = `liftUpBtn-${i}`;
+    }
 
     if (i === 0) {
+      // remove liftDownBtn from ground floor
+      clonedfloorContainer.querySelector('.liftDownBtn').remove();
       createLifts(clonedfloorContainer.querySelector('.liftContainer'));
+    }
+    if (i === floorCount - 1) {
+      // remove liftUpBtn from top floor
+      clonedfloorContainer.querySelector('.liftUpBtn').remove();
     }
     simulationContainer.prepend(clonedfloorContainer);
   }
@@ -75,7 +85,7 @@ function createFloorsAndLifts() {
 
   if (!validateSubmission(floorCount, liftCount)) return;
   toggleFormVisibility(true);
-  createFloors(floorCount, liftCount);
+  createFloors(floorCount);
   main();
 }
 
