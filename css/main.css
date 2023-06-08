@@ -74,7 +74,8 @@ body {
   display: flex;
 }
 
-.button {
+.button,
+.liftButton {
   display: block;
   margin: 1.5rem 0;
   background-color: none;

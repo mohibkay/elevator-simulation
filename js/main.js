@@ -13,21 +13,21 @@ function getLiftArray() {
 }
 
 function moveLift(liftCar, targetFloor, currentFloor) {
+  console.log('targetFloor', liftCar, targetFloor, currentFloor);
   const distance = Math.abs(targetFloor - currentFloor);
   liftCar.style.backgroundColor = 'red';
   liftCar.style.transform = `translateY(-${targetFloor * 200}px)`;
   liftCar.style.transition = `transform ${distance * 2}s ease-in-out`;
 }
 
-function addListenersToLiftBtn() {
+function addListenersToLiftBtns() {
   const liftArray = getLiftArray();
-  const liftUpBtn = document.querySelectorAll('.liftUpBtn');
+  const liftButton = document.querySelectorAll('.liftButton');
 
-  liftUpBtn.forEach((btn) => {
+  liftButton.forEach((btn) => {
     btn.addEventListener('click', () => {
       const [_, floorNumber] = btn.id.split('-');
       const liftCar = document.querySelector(`#liftCar-0`);
-
       moveLift(liftCar, floorNumber, liftArray[0].currentFloor);
       liftArray[0].currentFloor = floorNumber;
     });
@@ -62,6 +62,10 @@ function createFloors(floorCount) {
     ).textContent = `Floor ${i}`;
 
     const upBtn = clonedfloorContainer.querySelector('.liftUpBtn');
+    const downBtn = clonedfloorContainer.querySelector('.liftDownBtn');
+    if (downBtn !== null) {
+      downBtn.id = `liftDownBtn-${i}`;
+    }
     if (upBtn !== null) {
       upBtn.id = `liftUpBtn-${i}`;
     }
@@ -105,5 +109,5 @@ backButton.addEventListener('click', () => toggleFormVisibility(false));
 simulateBtn.addEventListener('click', createFloorsAndLifts);
 
 function main() {
-  addListenersToLiftBtn();
+  addListenersToLiftBtns();
 }
