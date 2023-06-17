@@ -1,7 +1,4 @@
-* {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --primary-color: #004eee;
@@ -9,14 +6,19 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Inter', serif;
   background-color: #f2f3f7;
 }
 
 .formContainer {
-  background-color: white;
-  max-width: max-content;
   margin: 4rem auto;
   padding: 2rem;
+  background-color: white;
+  max-width: max-content;
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
@@ -66,39 +68,36 @@ body {
   padding: 2rem;
 }
 
-.floorContainer {
-  margin-bottom: 2rem;
-}
-
 .liftContainer {
-  display: flex;
+  width: 75px;
+  height: 125px;
+  background-color: var(--primary-color);
+  margin: 0 1rem;
 }
 
-.button,
-.liftButton {
+.liftButtons {
+  margin: 25px 0;
+}
+
+.liftButtons button {
+  cursor: pointer;
   display: block;
-  margin: 1.5rem 0;
+  margin: 0;
   background-color: none;
   border: none;
   cursor: pointer;
 }
 
-.liftCar {
-  width: 75px;
-  height: 125px;
-  background-color: var(--primary-color);
-  margin: 0 2rem;
-  transition: transform ease-in-out 0.5s 0.5s;
+.liftUpBtn:disabled,
+.liftDownBtn:disabled,
+button:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
 }
 
 .floor {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.floorBase {
-  height: 2px;
-  background-color: var(--secondary-color);
-  flex: auto;
+  border-bottom: 1px solid #cbd5e1;
 }
