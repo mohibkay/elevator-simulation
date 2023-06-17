@@ -79,11 +79,12 @@ body {
   margin: 25px 0;
 }
 
-.liftButtons button {
+.liftButtons button,
+.backButton {
   cursor: pointer;
   display: block;
   margin: 0;
-  background-color: none;
+  background: none;
   border: none;
   cursor: pointer;
 }
