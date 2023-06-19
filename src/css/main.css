@@ -73,10 +73,43 @@ body {
 }
 
 .liftContainer {
-  width: 75px;
+  width: 76px;
   height: 125px;
-  background-color: var(--primary-color);
+  background-color: black;
   margin: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+.leftDoor {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  background-color: var(--primary-color);
+  width: 38px;
+  z-index: 999;
+  transition: width 2500ms ease-in-out;
+  border-left: 0.25px solid black;
+}
+
+.rightDoor {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  background-color: var(--primary-color);
+  width: 38px;
+  z-index: 999;
+  transition: width 2500ms ease-in-out;
+  border-right: 0.25px solid black;
+}
+
+.leftDoor__open {
+  width: 0;
+  transition: width 2500ms ease-in-out;
+}
+
+.rightDoor__open {
+  width: 0;
+  transition: width 2500ms ease-in-out;
 }
 
 .liftButtons {
