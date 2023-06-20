@@ -8,6 +8,8 @@ const errorMsg = document.querySelector('.errorMsg');
 const backButton = document.querySelector('.backButton');
 const simulateBtn = document.querySelector('.simulateBtn');
 const simulationContainer = document.querySelector('.simulationContainer');
+let leftDoors = document.querySelectorAll('.leftDoor');
+let rightDoors = document.querySelectorAll('.rightDoor');
 
 const lifts = Array.from(document.querySelectorAll('.liftContainer'), (el) => ({
   el,
@@ -55,16 +57,38 @@ const callLift = () => {
   }
 };
 
-const moveLift = (lift, targetFloor, index) => {
-  const liftHeight = lift.clientHeight + 1;
-  const distance = Math.abs(targetFloor - lifts[index].currentFloor);
-  lift.style.transform = `translateY(-${targetFloor * liftHeight}px)`;
-  lift.style.transition = `transform ${1500 * distance}ms ease-in-out`;
+const openLift = (index) => {
+  console.log('🐬 ~ openLift:', rightDoors[index]);
+  rightDoors[index].classList.add('rightDoor__open');
+  leftDoors[index].classList.add('leftDoor__open');
+};
+
+const closeLift = (index) => {
+  rightDoors[index].classList.remove('rightDoor__open');
+  leftDoors[index].classList.remove('leftDoor__open');
 
   setTimeout(() => {
     lifts[index].isAvailable = true;
     dispatchliftIdle();
-  }, distance * 1500 + 1000);
+  }, 2500);
+};
+
+const openCloseLift = (index) => {
+  openLift(index);
+  setTimeout(() => {
+    closeLift(index);
+  }, 3000);
+};
+
+const moveLift = (lift, targetFloor, index) => {
+  const liftHeight = lift.clientHeight + 1;
+  const distance = Math.abs(targetFloor - lifts[index].currentFloor);
+  lift.style.transform = `translateY(-${targetFloor * liftHeight}px)`;
+  lift.style.transition = `transform ${2000 * distance}ms linear`;
+
+  setTimeout(() => {
+    openCloseLift(index);
+  }, distance * 2000 + 1000);
 
   lifts[index].currentFloor = targetFloor;
 };
@@ -74,7 +98,6 @@ let requests = [];
 function addRequest(targetFloor) {
   requests.push(targetFloor);
   dispatchRequestAdded();
-  console.log('🐬 ~ requests:', requests);
 }
 
 function removeRequest() {
@@ -112,11 +135,21 @@ function addLift() {
     isAvailable: true,
     currentFloor: 0,
   });
+
+  rightDoors = document.querySelectorAll('.rightDoor');
+  leftDoors = document.querySelectorAll('.leftDoor');
 }
 
 function getLiftEl() {
   const liftEL = document.createElement('div');
   liftEL.classList.add('liftContainer');
+
+  liftEL.innerHTML += `
+            <div class="leftDoor">
+            </div>
+            <div class="rightDoor">
+            </div>
+        `;
   return liftEL;
 }
 
@@ -184,13 +217,21 @@ function toggleFormVisibility(shouldHide) {
 }
 
 function validateSubmission(floor, lift) {
+  const width = window.innerWidth;
+  const divisor = width < 450 ? 70 : 130;
+  const maxLiftAllowed = Math.floor(width / divisor);
+
   errorMsg.textContent = null;
-  if (floor <= lift) {
+  if (floor < lift) {
     errorMsg.textContent = 'Floors must be greater than elevators';
     return false;
   }
   if (lift < 1) {
     errorMsg.textContent = 'At least 1 elevator is required';
+    return false;
+  }
+  if (lift > maxLiftAllowed) {
+    errorMsg.textContent = `Max ${maxLiftAllowed} elevators are allowed`;
     return false;
   }
   return true;
