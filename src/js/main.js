@@ -217,8 +217,11 @@ function toggleFormVisibility(shouldHide) {
 
 function validateSubmission(floor, lift) {
   const width = window.innerWidth;
+  const divisor = width < 450 ? 70 : 130;
+  const maxLiftAllowed = Math.floor(width / divisor);
+
   errorMsg.textContent = null;
-  if (floor <= lift) {
+  if (floor < lift) {
     errorMsg.textContent = 'Floors must be greater than elevators';
     return false;
   }
@@ -226,8 +229,8 @@ function validateSubmission(floor, lift) {
     errorMsg.textContent = 'At least 1 elevator is required';
     return false;
   }
-  if (width < 450 && lift > 5) {
-    errorMsg.textContent = 'Only 5 elevators are allowed on mobile';
+  if (lift > maxLiftAllowed) {
+    errorMsg.textContent = `Max ${maxLiftAllowed} elevators are allowed`;
     return false;
   }
   return true;
