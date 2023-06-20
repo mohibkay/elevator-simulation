@@ -139,3 +139,18 @@ button:disabled {
   gap: 1rem;
   border-bottom: 1px solid var(--border-light);
 }
+
+@media only screen and (max-width: 400px) {
+  .liftContainer {
+    width: 40px;
+    margin: 0;
+  }
+
+  .leftDoor {
+    width: 20px;
+  }
+
+  .rightDoor {
+    width: 20px;
+  }
+}
