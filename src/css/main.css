@@ -126,6 +126,10 @@ body {
   cursor: pointer;
 }
 
+.backButton {
+  margin-bottom: 2rem;
+}
+
 .liftUpBtn:disabled,
 .liftDownBtn:disabled,
 button:disabled {
