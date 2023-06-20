@@ -83,11 +83,11 @@ const moveLift = (lift, targetFloor, index) => {
   const liftHeight = lift.clientHeight + 1;
   const distance = Math.abs(targetFloor - lifts[index].currentFloor);
   lift.style.transform = `translateY(-${targetFloor * liftHeight}px)`;
-  lift.style.transition = `transform ${2000 * distance}ms ease-in`;
+  lift.style.transition = `transform ${2000 * distance}ms linear`;
 
   setTimeout(() => {
     openCloseLift(index);
-  }, distance * 1500 + 1000);
+  }, distance * 2000 + 1000);
 
   lifts[index].currentFloor = targetFloor;
 };
