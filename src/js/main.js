@@ -58,6 +58,7 @@ const callLift = () => {
 };
 
 const openLift = (index) => {
+  console.log('🐬 ~ openLift:', rightDoors[index]);
   rightDoors[index].classList.add('rightDoor__open');
   leftDoors[index].classList.add('leftDoor__open');
 };

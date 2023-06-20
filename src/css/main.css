@@ -148,13 +148,26 @@ button:disabled {
   .liftContainer {
     width: 40px;
     margin: 0;
+    transition: width 2500ms ease-in-out;
   }
 
   .leftDoor {
     width: 20px;
+    transition: width 2500ms ease-in-out;
   }
 
   .rightDoor {
     width: 20px;
+    transition: width 2500ms ease-in-out;
+  }
+
+  .leftDoor__open {
+    width: 0;
+    transition: width 2500ms ease-in-out;
+  }
+
+  .rightDoor__open {
+    width: 0;
+    transition: width 2500ms ease-in-out;
   }
 }
